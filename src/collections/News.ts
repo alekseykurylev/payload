@@ -1,5 +1,13 @@
 import type { CollectionConfig } from 'payload'
 import { formatSlug } from '@/collections/hooks/format-slug'
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 
 export const News: CollectionConfig = {
   slug: 'news',
@@ -39,6 +47,17 @@ export const News: CollectionConfig = {
       name: 'content',
       type: 'richText',
       label: 'Содержание',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+            HorizontalRuleFeature(),
+          ]
+        },
+      }),
       // required: true,
     },
     {
