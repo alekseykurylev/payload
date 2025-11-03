@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { formatSlug } from '@/collections/hooks/format-slug'
 import {
-  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   HorizontalRuleFeature,
@@ -14,12 +13,23 @@ export const News: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'publishedAt'],
-    group: 'Контент',
+    group: 'Новости',
   },
   access: {
     read: () => true, // публичный REST API
   },
+
   fields: [
+    {
+      name: 'tags',
+      type: 'relationship',
+      relationTo: 'tags',
+      hasMany: true,
+      label: 'Теги',
+      admin: {
+        isSortable: true,
+      },
+    },
     {
       name: 'title',
       type: 'text',
@@ -39,11 +49,6 @@ export const News: CollectionConfig = {
       label: 'Slug',
     },
     {
-      name: 'excerpt',
-      type: 'textarea',
-      label: 'Краткое описание',
-    },
-    {
       name: 'content',
       type: 'richText',
       label: 'Содержание',
@@ -58,7 +63,7 @@ export const News: CollectionConfig = {
           ]
         },
       }),
-      // required: true,
+      required: true,
     },
     {
       name: 'image',

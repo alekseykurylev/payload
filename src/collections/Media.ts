@@ -15,5 +15,23 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload: {
+    staticDir: 'media',
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 400,
+      },
+      {
+        name: 'medium',
+        width: 800,
+      },
+      {
+        name: 'large',
+        width: 1600,
+      },
+    ],
+    adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/*'],
+  },
 }
